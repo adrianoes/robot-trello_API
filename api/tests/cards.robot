@@ -21,7 +21,7 @@ Create a card
     ${board_id}    Remove String    ${board_id_str}    [    ]    '    " 
     ${list_id}    Remove String    ${list_id_str}    [    ]    '    " 
     Create Session    alias=trello    url=https://api.trello.com
-    ${responseCC}    POST On Session    alias=trello    url=/1/cards?idList=${list_id}&key=${AUTH.KEY}&token=${AUTH.TOKEN}    data={name: "myCard123"}    expected_status=200     
+    ${responseCC}    POST On Session    alias=trello    url=/1/cards?idList=${list_id}&key=${KEY}&token=${TOKEN}    data={name: "myCard123"}    expected_status=200     
     ${card_id}    Set Variable    ${responseCC.json()['id']}
     Log To Console    ${card_id}       
     Create File    api/fixtures/testdata.json	{"board_id":"${board_id}","list_id":"${list_id}","card_id":"${card_id}"} 
@@ -36,7 +36,7 @@ Get a card
     ${card_id_str}    Convert JSON To String	${card_id_ob}
     ${card_id}    Remove String    ${card_id_str}    [    ]    '    "     
     Create Session    alias=trello    url=https://api.trello.com
-    ${responseGC}    GET On Session    alias=trello    url=/1/cards/${card_id}?key=${AUTH.KEY}&token=${AUTH.TOKEN}   expected_status=200     
+    ${responseGC}    GET On Session    alias=trello    url=/1/cards/${card_id}?key=${KEY}&token=${TOKEN}   expected_status=200     
     ${card_id}    Set Variable    ${responseGC.json()['id']}
     Log To Console    ${card_id}     
 
@@ -50,7 +50,7 @@ Update a card - name
     ${card_id_str}    Convert JSON To String	${card_id_ob}
     ${card_id}    Remove String    ${card_id_str}    [    ]    '    "     
     Create Session    alias=trello    url=https://api.trello.com
-    ${responseUC}    PUT On Session    alias=trello    url=/1/cards/${card_id}?key=${AUTH.KEY}&token=${AUTH.TOKEN}    data={name: "myCard2"}   expected_status=200     
+    ${responseUC}    PUT On Session    alias=trello    url=/1/cards/${card_id}?key=${KEY}&token=${TOKEN}    data={name: "myCard2"}   expected_status=200     
     ${card_name}    Set Variable    ${responseUC.json()['name']}
     Log To Console    ${card_name}  
 
@@ -63,4 +63,4 @@ Delete a card
     ${card_id_ob}    Get Value From Json    ${data}    $.card_id
     ${card_id_str}    Convert JSON To String	${card_id_ob}
     ${card_id}    Remove String    ${card_id_str}    [    ]    '    "     
-    Delete On Session    alias=trello    url=/1/cards/${card_id}?key=${AUTH.KEY}&token=${AUTH.TOKEN}     expected_status=200
+    Delete On Session    alias=trello    url=/1/cards/${card_id}?key=${KEY}&token=${TOKEN}     expected_status=200

@@ -18,7 +18,7 @@ Create a list
     ${board_id_str}    Convert JSON To String	${board_id_ob}
     ${board_id}    Remove String    ${board_id_str}    [    ]    '    " 
     Create Session    alias=trello    url=https://api.trello.com
-    ${responseCL}    POST On Session    alias=trello    url=/1/boards/${board_id}/lists?name=myList123&key=${AUTH.KEY}&token=${AUTH.TOKEN}    expected_status=200     
+    ${responseCL}    POST On Session    alias=trello    url=/1/boards/${board_id}/lists?name=myList123&key=${KEY}&token=${TOKEN}    expected_status=200     
     ${list_id}    Set Variable    ${responseCL.json()['id']}
     Log To Console    ${list_id}       
     Create File    api/fixtures/testdata.json	{"board_id":"${board_id}","list_id":"${list_id}"} 
@@ -31,7 +31,7 @@ Get a list
     ${list_id_str}    Convert JSON To String	${list_id_ob}
     ${list_id}    Remove String    ${list_id_str}    [    ]    '    "     
     Create Session    alias=trello    url=https://api.trello.com
-    ${responseGL}    GET On Session    alias=trello    url=/1/lists/${list_id}?key=${AUTH.KEY}&token=${AUTH.TOKEN}   expected_status=200     
+    ${responseGL}    GET On Session    alias=trello    url=/1/lists/${list_id}?key=${KEY}&token=${TOKEN}   expected_status=200     
     ${list_id}    Set Variable    ${responseGL.json()['id']}
     Log To Console    ${list_id}        
 
@@ -43,7 +43,7 @@ Update a list - name
     ${list_id_str}    Convert JSON To String	${list_id_ob}
     ${list_id}    Remove String    ${list_id_str}    [    ]    '    "     
     Create Session    alias=trello    url=https://api.trello.com
-    ${responseUL}    PUT On Session    alias=trello    url=/1/lists/${list_id}?key=${AUTH.KEY}&token=${AUTH.TOKEN}    data={name: "myList2"}   expected_status=200     
+    ${responseUL}    PUT On Session    alias=trello    url=/1/lists/${list_id}?key=${KEY}&token=${TOKEN}    data={name: "myList2"}   expected_status=200     
     ${list_name}    Set Variable    ${responseUL.json()['name']}
     Log To Console    ${list_name} 
     
